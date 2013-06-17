@@ -1,0 +1,3 @@
+[submodule "fancybox"]
+	path = fancybox
+	url = git://github.com/fancyapps/fancyBox.git

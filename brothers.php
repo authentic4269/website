@@ -1,0 +1,55 @@
+<?php
+
+require_once("global_header.php");
+
+$info = array();
+
+$result = $mysqli->query("SELECT * FROM brothers ORDER BY o, year, name");
+while($row = $result->fetch_assoc()) {
+  $info[] = $row;
+}
+
+function render_bros($info) {
+  $n = 0;
+
+  foreach ($info as $bro) {
+    $img = $bro["image"] == ""
+      ? "https://graph.facebook.com/".$bro["fbid"]."/picture?type=large"
+      :  $bro["image"];
+    $link = $bro["fbid"] == ""
+      ? "#"
+      : "http://www.facebook.com/people/@/".$bro["fbid"];
+    if ($bro["name"] == "You") {
+      $link = "recruitment.php";
+    }
+    if ($n % 5 == 0) {
+      echo "</tr><tr>";
+    }
+    echo
+      "<td><div class='cdiv'><div class='pimg'><a href='$link'>" .
+      "<img src='$img' width='110px' /></a></div><br />" .
+      "<span class='bname gold'><a href='$link'>".$bro['name']."</a></span>" .
+      "<br /><span class='position'>".$bro['title']." ".$bro['year']."</span>" .
+      "<br /></div></td>";
+    $n++;
+  }
+}
+
+?>
+<div id="main" role="main">
+  <div class="content_full center">
+    <h1 class="gold">Current Brothers</h1>
+
+    <table id="brothers" align="center">
+      <tr>
+        <? render_bros($info); ?>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<?php
+
+require_once("global_footer.php");
+
+?>

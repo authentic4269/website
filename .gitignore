@@ -1,0 +1,8 @@
+# OS-specific
+.DS_Store
+Thumbs.db
+
+*.log
+*.pdf
+
+includes/config.php
