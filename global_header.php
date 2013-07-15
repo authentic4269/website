@@ -5,15 +5,6 @@ session_start();
 require("./includes/config.php");
 require("./includes/util.php");
 
-@$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-if (mysqli_connect_errno()) {
-  die('<h1>Could not connect to the database</h1>' .
-      '<h2>Please try again after a few moments.</h2>');
-}
-
-$mysqli->set_charset("utf8");
-
 $pages = array(
   'index' => array('Home', './'),
   'chapter' => array('Chapter', 'chapter.php'),

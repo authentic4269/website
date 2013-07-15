@@ -5,4 +5,6 @@ Thumbs.db
 *.log
 *.pdf
 
+brothers/*.jpg
+
 includes/config.php

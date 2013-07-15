@@ -13,9 +13,14 @@ function render_bros($info) {
   $n = 0;
 
   foreach ($info as $bro) {
-    $img = $bro["image"] == ""
-      ? "https://graph.facebook.com/".$bro["fbid"]."/picture?type=large"
-      :  $bro["image"];
+    // Try to load the cached image, and fallback to the FB image.
+    if (file_exists('brothers/'.$bro["fbid"].'.jpg')) {
+      $img = '/brothers/'.$bro["fbid"].'.jpg';
+    } else {
+      $img = $bro["image"] == ""
+        ? "https://graph.facebook.com/".$bro["fbid"]."/picture?type=large"
+        :  $bro["image"];
+    }
     $link = $bro["fbid"] == ""
       ? "#"
       : "http://www.facebook.com/people/@/".$bro["fbid"];
