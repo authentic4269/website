@@ -4,7 +4,10 @@ require_once("global_header.php");
 
 $info = array();
 
-$result = $mysqli->query("SELECT * FROM brothers ORDER BY o, year, name");
+$result = $mysqli->query(
+  "SELECT *, (SELECT GROUP_CONCAT(title SEPARATOR ', ') FROM positions p ".
+  "WHERE find_in_set(pid, b.title) > 0) as pos FROM brothers b ".
+  "ORDER BY SUBSTRING_INDEX(title, ',', 1) * 1, year, name");
 while($row = $result->fetch_assoc()) {
   $info[] = $row;
 }
@@ -34,7 +37,7 @@ function render_bros($info) {
       "<td><div class='cdiv'><div class='pimg'><a href='$link'>" .
       "<img src='$img' width='110px' /></a></div><br />" .
       "<span class='bname gold'><a href='$link'>".$bro['name']."</a></span>" .
-      "<br /><span class='position'>".$bro['title']." ".$bro['year']."</span>" .
+      "<br /><span class='position'>".$bro['pos']." ".$bro['year']."</span>" .
       "<br /></div></td>";
     $n++;
   }
