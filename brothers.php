@@ -2,6 +2,15 @@
 
 require_once("global_header.php");
 
+$admin = false;
+if (isset($_GET['admin']) && $_GET['admin'] == '1') {
+  if ($_SESSION["logged_in"] != true) {
+    header("Location: ./login.php");
+    die();
+  }
+  $admin = true;
+}
+
 $info = array();
 
 $result = $mysqli->query(
@@ -9,15 +18,28 @@ $result = $mysqli->query(
   "WHERE find_in_set(pid, b.title) > 0) as pos FROM brothers b ".
   "ORDER BY SUBSTRING_INDEX(title, ',', 1) * 1, year, name");
 while($row = $result->fetch_assoc()) {
+  if ($admin) {
+    $newimage = get_web_page(
+      "https://graph.facebook.com/".$row["fbid"]."/picture?type=large");
+    if ($row["image"] != $newimage) {
+      $row["new_image"] = $newimage;
+    }
+  }
   $info[] = $row;
 }
 
-function render_bros($info) {
+function render_bros($info, $admin) {
   $n = 0;
 
   foreach ($info as $bro) {
     // Try to load the cached image, and fallback to the FB image.
-    if (file_exists('brothers/'.$bro["fbid"].'.jpg')) {
+    $update_link = "";
+    if ($admin && $bro["new_image"] != "") {
+      $img = $bro["new_image"];
+      $update_link =
+        "<a class='approve' href='update_bro.php?fbid=".$bro["fbid"] .
+        "'>&#x2713;</a>";
+    } else if (file_exists('brothers/'.$bro["fbid"].'.jpg')) {
       $img = '/brothers/'.$bro["fbid"].'.jpg';
     } else {
       $img = $bro["image"] == ""
@@ -38,7 +60,7 @@ function render_bros($info) {
       "<img src='$img' width='110px' /></a></div><br />" .
       "<span class='bname gold'><a href='$link'>".$bro['name']."</a></span>" .
       "<br /><span class='position'>".$bro['pos']." ".$bro['year']."</span>" .
-      "<br /></div></td>";
+      "<br />".$update_link."</div></td>";
     $n++;
   }
 }
@@ -50,7 +72,7 @@ function render_bros($info) {
 
     <table id="brothers" align="center">
       <tr>
-        <? render_bros($info); ?>
+        <? render_bros($info, $admin); ?>
       </tr>
     </table>
   </div>
