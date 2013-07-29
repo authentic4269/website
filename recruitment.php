@@ -2,6 +2,27 @@
 
 require_once("global_header.php");
 
+function get_years() {
+  $year = date('Y');
+  // Get the number of days since the beginning of the year.
+  $days = floor((time() - mktime(null, null, null, 1, 0, date("Y"))) / 86400);
+
+  $years = array();
+
+  if ($days < 31) {
+    $years[] = $year;
+  }
+  $years[] = $year + 1;
+  $years[] = $year + 2;
+  $years[] = $year + 3;
+  // Show the youngest year if we are past Oct. 15.
+  if ($days > 288) {
+    $years[] = $year + 4;
+  }
+
+  return $years;
+}
+
 ?>
 <div id="main" role="main">
   <div class="content_left pull-left">
@@ -48,30 +69,14 @@ require_once("global_header.php");
         <label id="optionsRadio">Year</label>
         <div class="input">
           <ul class="inputs-list">
-            <li>
-              <label>
-                <input type="radio" name="year" value="2014" class="ss-q-radio">
-                <span>2014</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="year" value="2013" class="ss-q-radio">
-                <span>2013</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="year" value="2012" class="ss-q-radio">
-                <span>2012</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="year" value="2011" class="ss-q-radio"> 
-                <span>2011</span>
-              </label>
-            </li>
+          <? foreach (get_years() as $year) { ?>
+          <li>
+            <label>
+              <input type="radio" name="year" value="<?php echo $year ?>">
+              <span><?php echo $year ?></span>
+            </label>
+          </li>
+          <? } ?>
           </ul>
         </div>
       </div>
