@@ -23,6 +23,51 @@ function get_years() {
   return $years;
 }
 
+function send_email() {
+  $to = RUSH_CHAIR;
+  $from = "recruitment@cornelldelts.org";
+  $subject = "CornellDelts.org Recruitment Submission";
+  $headers = "From:" . $from . "\r\n";
+
+  // Required to send HTML tags in email.
+  $headers .= 'MIME-Version: 1.0' . "\r\n";
+  $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+  $data = array(
+    'Name' => $_POST['entry_0_single'] . ' ' . $_POST['entry_1_single'],
+    'Year' => $_POST['year'],
+    'NetID' => $_POST['entry_3_single'],
+    'Phone' => $_POST['entry_4_single'],
+    'Dorm' => $_POST['entry_5_single'],
+    'Room' => $_POST['entry_6_single'],
+  );
+
+  $message = "Someone filled out the recruitment form on cornelldelts.org.";
+  foreach ($data as $k => $v) {
+    $message .= '<br /><br /><b>' . $k . '</b>: ' . $v;
+  }
+
+  mail($to, $subject, $message, $headers);
+}
+
+function verify_captcha() {
+  $req = new HttpRequest(
+    "http://www.google.com/recaptcha/api/verify",
+    HttpRequest::METH_POST
+  );
+  $req->addPostFields(array(
+    'privatekey' => CAPTCHA_PRI,
+    'remoteip' => $_SERVER['REMOTE_ADDR'],
+    'challenge' => $_POST['recaptcha_challenge_field'],
+    'response' => $_POST['recaptcha_response_field'],
+  ));
+
+  $req->send();
+  $response = explode("\n", $req->getResponseBody());
+
+  return ($response[0] == "true");
+}
+
 ?>
 <div id="main" role="main">
   <div class="content_left pull-left">
@@ -47,9 +92,19 @@ function get_years() {
         of becoming a Cornell Delt.</a>
       <span id="clogosm"></span>
     </div>
+    <?php
+      if (isset($_POST['submit']) && $_POST['submit'] == 'Submit') {
+        if (verify_captcha()) {
+          send_email();
+          echo '<h2 class="gold">Thanks! The form was submitted.</h2>';
+        } else {
+          echo '<h2 class="gold">Incorrect CAPTCHA value entered.</h2>';
+        }
+      }
+    ?>
     <h2 class="gold">Sign up for more information about Delta Tau Delta.</h2>
     <form
-      action="https://spreadsheets.google.com/formResponse?formkey=dGFfTUYxVXJlYnNFcTkzcUVNNHlpN0E6MA&amp;theme=0AX42CRMsmRFbUy1iOGYwN2U2Mi1hNWU0LTRlNjEtYWMyOC1lZmU4ODg1ODc1ODI&amp;ifq"
+      action="<? echo $_SERVER['PHP_SELF'] ?>"
       method="POST"
       id="ss-form"
       style="position:relative;">
@@ -103,6 +158,16 @@ function get_years() {
         <div class="input">
           <input class="xlarge" name="entry.6.single" class="ss-q-short" />
         </div>
+      </div>
+      <div class="clearfix input">
+        <script type="text/javascript">
+          var RecaptchaOptions = {
+            theme : 'blackglass'
+          };
+        </script>
+        <script type="text/javascript"
+          src="http://google.com/recaptcha/api/challenge?k=<?=CAPTCHA_PUB?>">
+        </script>
       </div>
       <div class="actions">
         <input type="submit" name="submit" value="Submit" />
