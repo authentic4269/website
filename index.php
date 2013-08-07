@@ -38,18 +38,7 @@ require_once("global_header.php");
           src="http://maps.googleapis.com/maps/api/staticmap?center=Delta+Tau+Delta,+Ithaca,+NY&zoom=12&size=600x120&maptype=roadmap&markers=color:red|Delta+Tau+Delta,+Ithaca,+NY&sensor=false" />
       </a>
     </p>
-    <?php if (ADS_SWITCH > 0): ?><br />
-      <iframe
-        src="http://rcm.amazon.com/e/cm?t=cornel-20&o=1&p=13&l=ur1&category=textbooks&banner=1RQK7WBPFE6ANNRN0302&f=ifr"
-        width="468"
-        height="60"
-        scrolling="no"
-        border="0"
-        marginwidth="0"
-        style="border:none;"
-        frameborder="0">
-      </iframe>
-    <?php endif; ?>
+    <? echo show_ad(0, 'amazon'); ?>
   </div>
   <div class="content_right pull-right">
     <a href="recruitment.php" class="button">

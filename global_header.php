@@ -4,6 +4,7 @@ session_start();
 
 require("./includes/config.php");
 require("./includes/util.php");
+require("./includes/ads.php");
 
 $pages = array(
   'index' => array('Home', './'),
@@ -36,21 +37,7 @@ $curr = str_replace(".php", "", basename($_SERVER['SCRIPT_FILENAME']));
   <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
 </head>
 <body>
-  <?php if(ADS_SWITCH > 1): ?>
-  <div id="sky_ad">
-    <script type="text/javascript"><!--
-    google_ad_client = "ca-pub-0186606151188253";
-    /* Delts6 */
-    google_ad_slot = "7915561872";
-    google_ad_width = 120;
-    google_ad_height = 600;
-    //-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-  </div>
-  <?php endif; ?>
+  <? echo show_ad(1, 'google'); ?>
   <?php
   if (PROMO_BAR):
   ?>

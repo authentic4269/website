@@ -375,6 +375,10 @@ form {
   margin-top: 20px;
 }
 
+.advertisement {
+  display: inline;
+}
+
 #h8rz, #mapbg, #like_overlay {
   display:none;
   position:fixed;

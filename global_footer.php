@@ -1,47 +1,10 @@
 <footer>
-  <?php if (ADS_SWITCH > 1): ?>
-    <br />
-    <iframe
-      src="http://rcm.amazon.com/e/cm?t=cornel-20&o=1&p=13&l=ur1&category=electronics&f=ifr"
-      width="468"
-      height="60"
-      scrolling="no"
-      border="0"
-      marginwidth="0"
-      style="border:none;"
-      frameborder="0">
-    </iframe>
-  <?php endif; ?>
-  <?php if (ADS_SWITCH > 0): ?>
-    <br /><br />
-    <iframe
-      src="http://rcm.amazon.com/e/cm?t=cornel-20&o=1&p=14&l=ur1&category=school&banner=01VZNG2ST81NJ10BNGR2&f=ifr"
-      width="160"
-      height="600"
-      scrolling="no"
-      border="0"
-      marginwidth="0"
-      style="border:none;"
-      frameborder="0">
-    </iframe>
-  <?php endif; ?>
+  <? echo show_ad(1, 'amazon'); ?>
+  <? echo show_ad(0, 'amazon'); ?>
   <h3 class="tcfp gold">Truth, Courage, Faith, Power</h3>
   Email: <a class="designer" href="mailto:delts@cornell.edu">
     delts@cornell.edu</a><br />
-  <?php if (ADS_SWITCH > 1): ?>
-    <script type="text/javascript"><!--
-    google_ad_client = "ca-pub-0186606151188253";
-    /* Delts4 */
-    google_ad_slot = "8402671919";
-    google_ad_width = 468;
-    google_ad_height = 60;
-    //-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-    <br /><br />
-  <?php endif; ?>
+  <? echo show_ad(1, 'google'); ?>
   &copy; Delta Tau Delta Beta Omicron <?php echo date("Y"); ?><br />
   Site made by <a href="http://wschurman.com" class="designer">
     William Schurman</a><br /><br />

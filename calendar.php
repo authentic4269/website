@@ -14,20 +14,7 @@ require_once("global_header.php");
       frameborder="0"
       scrolling="no">
     </iframe>
-    <?php if (ADS_SWITCH > 0): ?>
-    <br />
-    <script type="text/javascript"><!--
-    google_ad_client = "ca-pub-0186606151188253";
-    /* Delts3 */
-    google_ad_slot = "1267708999";
-    google_ad_width = 728;
-    google_ad_height = 15;
-    //-->
-    </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-    <?php endif; ?>
+    <? echo show_ad(0, 'google'); ?>
   </div>
 </div>
 
