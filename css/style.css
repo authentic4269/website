@@ -141,7 +141,7 @@ header nav ul li.selected a {
 }
 
 #featured {
-  margin-top:20px;
+  margin-top:40px;
   border-radius: 10px;
   
   background-image: linear-gradient(bottom, rgb(44,14,46) 0%, rgb(126,72,113) 50%, rgb(166,69,164) 100%);
@@ -249,8 +249,16 @@ p {
   width: 100%;
 }
 
+#main .content_left {
+  margin-top: 15px;
+}
+
 .content_left {
   width: 65%;
+}
+
+#main .content_right {
+  margin-top: 33px;
 }
 
 .content_right {
