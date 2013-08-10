@@ -1,3 +1,6 @@
 [submodule "fancybox"]
 	path = fancybox
 	url = git://github.com/fancyapps/fancyBox.git
+[submodule "xhp"]
+	path = xhp
+	url = git://github.com/facebook/xhp

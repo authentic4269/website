@@ -33,7 +33,6 @@ $(document).ready(function(){
   });
 
   if ($("#rush_overlay").length > 0) {
-    console.log($("#rush_overlay"));
     var d = $("#rush_overlay");
     $.fancybox.open(d, {content:d, width:600, autoSize:false});
   }
@@ -109,15 +108,6 @@ $(document).ready(function(){
     // Find the href attribute value to identify the active tab + content
     var activeTab = $(this).find("a").attr("href");
     $(activeTab).fadeIn(); //Fade in the active ID content
-    return false;
-  });
-
-  $("a.approve").click(function() {
-    var d = $(this);
-    jQuery.get($(this).attr("href"), function(data) {
-      d.hide();
-      console.log(data);
-    });
     return false;
   });
 });

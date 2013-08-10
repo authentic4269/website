@@ -75,22 +75,22 @@ AddType application/x-font-woff        woff
 # ----------------------------------------------------------------------
 # Start rewrite engine
 # ----------------------------------------------------------------------
+RewriteEngine On
 
-# Turning on the rewrite engine is necessary for the following rules and features.
-# FollowSymLinks must be enabled for this to work.
-
-<IfModule mod_rewrite.c>
-  Options +FollowSymlinks
-  RewriteEngine On
-</IfModule>
-
+Options +FollowSymlinks +ExecCGI
 
 # ----------------------------------------------------------------------
 # Custom 404 page
 # ----------------------------------------------------------------------
 
-# You can add custom pages to handle 500 or 403 pretty easily, if you like.
-ErrorDocument 404 /404.php
+ErrorDocument 404 /404
+
+# Disallow access to version control information.
+RedirectMatch 404 /\\.git.*(/|$)
+
+# Redirect everything but static resource requests to index.php.
+RewriteCond %{REQUEST_URI} !(\.css|\.png|\.jpg|\.jpeg|\.js|\.pdf)$
+RewriteRule (.*) index.php?req=%{REQUEST_URI} [QSA]
 
 # ----------------------------------------------------------------------
 # UTF-8 encoding
@@ -102,16 +102,9 @@ AddDefaultCharset utf-8
 # Force UTF-8 for a number of file formats
 AddCharset utf-8 .html .css .js .xml .json .rss .atom
 
-
 # ----------------------------------------------------------------------
 # A little more security
 # ----------------------------------------------------------------------
-
-# Block access to "hidden" directories whose names begin with a period. This
-# includes directories used by version control systems such as Subversion or Git.
-<IfModule mod_rewrite.c>
-  RewriteRule "(^|/)\." - [F]
-</IfModule>
 
 # Increase cookie security
 <IfModule php5_module>

@@ -1,25 +1,21 @@
 <?php
 
-require_once("global_header.php");
+class WebChapterController extends WebBaseController {
 
-$result = $mysqli->query("SELECT count(*) FROM brothers");
-$row = $result->fetch_row();
+  private function countBrothers() {
+    $result = $this->mysqli->query("SELECT count(*) FROM brothers");
+    $row = $result->fetch_row();
+    return $row[0];
+  }
 
-$bro_count = $row[0];
+  /**
+   * Renders the inner content markup for the page.
+   * @return string The inner content markup.
+   */
+  protected function renderContent() {
+    $bcount = $this->countBrothers();
 
-?>
-<div id="main" role="main">
-  <div class="content_left pull-left">
-    <h1 class="gold">Lifelong learning and growth are vital</h1>
-    <ul class="tabs">
-      <li><a href="#tab1">About Beta Omicron</a></li>
-      <li><a href="#tab2">Shelter</a></li>
-      <li><a href="#tab3">
-        <span class="letters">&Delta;&Tau;&Delta;</span></a></li>
-      <li><a href="#tab4">Scholarship</a></li>
-    </ul>
-
-    <div class="tab_container">
+    $tabs = array(
       <div id="tab1" class="tab_content">
         <h2>Why Go Delt?</h2>
         <h3>Beta Omicron</h3>
@@ -112,100 +108,117 @@ $bro_count = $row[0];
           the lives of our family and friends. Delta Tau Delta is pleased to
           provide Delts Talking About Alcohol: Powered by GreekLifeEdu as a
           component of our member education initiatives.</p>
-      </div>
+      </div>,
+
       <div id="tab2" class="tab_content">
         <h2>Delt Housing Information</h2>
         <h3>Surroundings</h3>
         <p>Living in the fraternity house has a great impact on your life. You
           are constantly surrounded by the Brothers who have been through the
           same initiation you have. Which means you instantly have a unique bond
-          that binds you together. Living with <?=$bro_count - 1?> of your close
+          that binds you together. Living with {$bcount - 1} of your close
           friends is definitely a unique experience. There is always something
-          to do at the Delt house whether it's going to the gym, playing
+          to do at the Delt house whether it&apos;s going to the gym, playing
           basketball or volleyball, or just relaxing about the house talking to
           your brothers.</p>
         <img id="delt_shelter" src="img/delt.jpeg" width="500px" />
         <h3>Delt Housing Facts</h3>
-          <ul id="housing">
-            <li>Home to <?php echo $bro_count; ?> brothers</li>
-            <li>Every brother has their own bedroom</li>
-            <li>Extra-Large Common Area for all brothers</li>
-            <li>Shared kitchen, dining room, library, and laundry room</li>
-            <li>2 - 50&quot; HD TVs</li>
-            <li>Speaker system that blows clothes off</li>
-            <li>802.11n WPA2 Enterprise Wifi</li>
-            <li>Free parking</li>
-            <li>New furniture, ping pong table, billiards table</li>
-            <li>Completely renovated, state-of-the-art gym</li>
-          </ul>
-        </div>
-        <div id="tab3" class="tab_content">
-          <h2>Fraternity History</h2>
-          <p>Delta Tau Delta was founded in 1858 at Bethany College in present
-            day West Virginia. Eight men, angered by a fixed vote for a prize in
-            oratory to be given at the Neotrophian Literary Society (a forum for
-            students to practice and demonstrate skills in poetry, public
-            speaking and writing essays), responded by forming a secret society.
-            The purpose of the new society, known only by the Greek letters
-            Delta Tau Delta, was to see the Neotrophian Society returned to
-            popular control from the Phi Kappa Psi Fraternity, and to form an
-            organization of the student body drawn together by common aims,
-            brotherly regard and desire for mutual support.</p>
-          <p>Delta Tau Delta was born of the knowledge that integrity is
-            essential. The founding principles of Truth, Courage, Faith and
-            Power have provided a guide for both the Fraternity and its
-            membership.</p>
-          <p>Since 1858 the Fraternity has spread to nearly 200 campuses with
-            over 120 active chapters and colonies comprised of about 6,500
-            undergraduate members. For over 150 years, Delta Tau Delta has in
-            excess of 150,000 men who have become members of the Fraternity.</p>
-        </div>
-        <div id="tab4" class="tab_content">
-          <h2>The John Hunt Scholarship</h2>
-          <h3>Congratulations to our Fall 2010 Winner, Sadev Parikh!</h3>
-          <h3>About the Scholarship</h3>
-          <p>Delta Tau Delta International Fraternity was founded in 1858 by a
-            group of eight men dedicated to six basic values.  John L. N. Hunt
-            was the founder who most championed academic excellence, one of
-            these core values.  After graduating, he would go on to serve as New
-            York State's Commissioner of Education for several years.  This
-            first annual John Hunt Scholarship will be awarded to the first-year
-            man who most exemplifies Hunt's commitment to Lifelong Learning and
-            Growth.</p>
-          <h3>Eligibility:</h3>
-          <p>Must have full-time first-year undergraduate status with Cornell
-            University.  Applicants need not have interest in becoming a member
-            of the Fraternity.</p>
-          <h3>Deadline:</h3>
-          <p>Applicants should postmark or return a completed application to
-            Delta Tau Delta, at 104 Mary Ann Wood Drive, Ithaca, NY 14850, by
-            Friday, October 30, 2010. </p>
-          <h3>Prize:</h3>
-          <p>First-place winner will receive an award of $250.</p>
-        </div>
-      </div>
-    </div>
-    <div class="content_right pull-right">
-      <a href="recruitment.php" class="button">
-        <strong>Sign Up Today!</strong><br />
-        <small>Become a man of excellence</small>
-      </a>
-      <h2 class="gold">Helpful Links</h2>
-      <ul>
-        <li><a href="http://www.delts.org">
-          delts.org - National Web Site</a></li>
-        <li><a href="http://greeks.cornell.edu">
-          greeks.cornell.edu - Cornell OFSA </a></li>
+        <ul id="housing">
+          <li>Home to {$bcount} brothers</li>
+          <li>Every brother has their own bedroom</li>
+          <li>Extra-Large Common Area for all brothers</li>
+          <li>Shared kitchen, dining room, library, and laundry room</li>
+          <li>2 - 50&quot; HD TVs</li>
+          <li>Speaker system that blows clothes off</li>
+          <li>802.11n WPA2 Enterprise Wifi</li>
+          <li>Free parking</li>
+          <li>New furniture, ping pong table, billiards table</li>
+          <li>Completely renovated, state-of-the-art gym</li>
         </ul>
-        <br /><br />
-        <h3>"I would found an institution where any person can find instruction
-          in any study." - Ezra Cornell, 1868</h3>
-    </div>
-  </div>
-</div>
+      </div>,
 
-<?php
+      <div id="tab3" class="tab_content">
+        <h2>Fraternity History</h2>
+        <p>Delta Tau Delta was founded in 1858 at Bethany College in present
+          day West Virginia. Eight men, angered by a fixed vote for a prize in
+          oratory to be given at the Neotrophian Literary Society (a forum for
+          students to practice and demonstrate skills in poetry, public
+          speaking and writing essays), responded by forming a secret society.
+          The purpose of the new society, known only by the Greek letters
+          Delta Tau Delta, was to see the Neotrophian Society returned to
+          popular control from the Phi Kappa Psi Fraternity, and to form an
+          organization of the student body drawn together by common aims,
+          brotherly regard and desire for mutual support.</p>
+        <p>Delta Tau Delta was born of the knowledge that integrity is
+          essential. The founding principles of Truth, Courage, Faith and
+          Power have provided a guide for both the Fraternity and its
+          membership.</p>
+        <p>Since 1858 the Fraternity has spread to nearly 200 campuses with
+          over 120 active chapters and colonies comprised of about 6,500
+          undergraduate members. For over 150 years, Delta Tau Delta has in
+          excess of 150,000 men who have become members of the Fraternity.</p>
+      </div>,
 
-require_once("global_footer.php");
+      <div id="tab4" class="tab_content">
+        <h2>The John Hunt Scholarship</h2>
+        <h3>Congratulations to our Fall 2010 Winner, Sadev Parikh!</h3>
+        <h3>About the Scholarship</h3>
+        <p>Delta Tau Delta International Fraternity was founded in 1858 by a
+          group of eight men dedicated to six basic values.  John L. N. Hunt
+          was the founder who most championed academic excellence, one of
+          these core values.  After graduating, he would go on to serve as New
+          York State&apos;s Commissioner of Education for several years.  This
+          first annual John Hunt Scholarship will be awarded to the first-year
+          man who most exemplifies Hunt&apos;s commitment to Lifelong Learning
+          and Growth.</p>
+        <h3>Eligibility:</h3>
+        <p>Must have full-time first-year undergraduate status with Cornell
+          University.  Applicants need not have interest in becoming a member
+          of the Fraternity.</p>
+        <h3>Deadline:</h3>
+        <p>Applicants should postmark or return a completed application to
+          Delta Tau Delta, at 104 Mary Ann Wood Drive, Ithaca, NY 14850, by
+          Friday, October 30, 2010. </p>
+        <h3>Prize:</h3>
+        <p>First-place winner will receive an award of $250.</p>
+      </div>,
+    );
 
-?>
+    $tab_container = <div class="tab_container" />;
+    foreach ($tabs as $tab) {
+      $tab_container->appendChild($tab);
+    }
+
+    return
+      <div id="main">
+        <div class="content_left pull-left">
+          <h1 class="gold">Lifelong learning and growth are vital</h1>
+          <ul class="tabs">
+            <li><a href="#tab1">About Beta Omicron</a></li>
+            <li><a href="#tab2">Shelter</a></li>
+            <li><a href="#tab3">
+              <span class="letters">&Delta;&Tau;&Delta;</span></a></li>
+            <li><a href="#tab4">Scholarship</a></li>
+          </ul>
+          {$tab_container}
+        </div>
+        <div class="content_right pull-right">
+          <a href="/recruitment" class="button">
+            <strong>Sign Up Today!</strong><br />
+            <small>Become a man of excellence</small>
+          </a>
+          <h2 class="gold">Helpful Links</h2>
+          <ul>
+            <li><a href="http://www.delts.org">
+              delts.org - National Web Site</a></li>
+            <li><a href="http://greeks.cornell.edu">
+              greeks.cornell.edu - Cornell OFSA </a></li>
+            </ul>
+            <br /><br />
+            <h3>"I would found an institution where any person can find
+              instruction in any study." - Ezra Cornell, 1868</h3>
+        </div>
+      </div>;
+  }
+
+}
