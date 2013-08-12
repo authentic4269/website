@@ -78,7 +78,7 @@ abstract class WebBaseController extends WebObject {
         {WebAdController::showAd(1, 'google')}
         &copy; Delta Tau Delta Beta Omicron {date("Y")}<br />
         Site made by <a href="http://wschurman.com" class="designer">
-        William Schurman</a><br /><br />
+        William Schurman</a> and <a href="http://bcuccioli.com" class="designer">Bryan Cuccioli</a><br /><br />
         &#x21E1; &#x21E1; &#x21E3; &#x21E3; &#x21E0; &#x21E2; &#x21E0;
         &#x21E2; b a
         <div id="h8rz" style="display:none;">
