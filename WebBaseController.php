@@ -50,6 +50,25 @@ abstract class WebBaseController extends WebObject {
       </head>;
   }
 
+  private function getLoginLink() {
+    if (!$this->isLoggedIn()) {
+      $facebook = new Facebook(array(
+        'appId' => Config::FB_APP_ID,
+        'secret' => Config::FB_APP_SECRET,
+      ));
+      $url = $facebook->getLoginUrl();
+      $text = "Login";
+    } else {
+      $url = '/logout';
+      $text = "Logout";
+    }
+
+    return
+      <li>
+        <a href={$url}>{$text}</a>
+      </li>;
+  }
+
   private function renderTopLinks() {
     $tabs = <ul />;
     foreach ($this->pages as $key => $val) {
@@ -63,6 +82,7 @@ abstract class WebBaseController extends WebObject {
         </li>
       );
     }
+    $tabs->appendChild($this->getLoginLink());
 
     return $tabs;
   }
@@ -78,7 +98,9 @@ abstract class WebBaseController extends WebObject {
         {WebAdController::showAd(1, 'google')}
         &copy; Delta Tau Delta Beta Omicron {date("Y")}<br />
         Site made by <a href="http://wschurman.com" class="designer">
-        William Schurman</a> and <a href="http://bcuccioli.com" class="designer">Bryan Cuccioli</a><br /><br />
+        William Schurman</a> and
+        <a href="http://bcuccioli.com" class="designer">Bryan Cuccioli</a>
+        <br /><br />
         &#x21E1; &#x21E1; &#x21E3; &#x21E3; &#x21E0; &#x21E2; &#x21E0;
         &#x21E2; b a
         <div id="h8rz" style="display:none;">
@@ -120,13 +142,13 @@ abstract class WebBaseController extends WebObject {
               {$this->renderContent()}
               {$this->getFooter()}
             </div>
-            <script src="js/plugins.js"></script>,
+            <script src="js/plugins.js"></script>
             <script src="fancybox/source/jquery.fancybox.pack.js?v=2.0.4">
             </script>
-            <script src="js/script.js?v=1"></script>,
-            <script src="js/analytics.js"></script>,
-            <div id="fb-root"></div>,
-            <script src="js/facebook.js"></script>,
+            <script src="js/script.js?v=1"></script>
+            <script src="js/analytics.js"></script>
+            <div id="fb-root"></div>
+            <script src="js/facebook.js"></script>
           </body>
         </html>
       </x:doctype>;

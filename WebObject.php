@@ -3,6 +3,8 @@
 abstract class WebObject {
 
   protected $mysqli;
+  private $loggedIn;
+  private $isAdmin;
 
   public function __construct() {
     // Set the default timezone.
@@ -20,14 +22,38 @@ abstract class WebObject {
     }
 
     $this->mysqli->set_charset("utf8");
+
+    $facebook = new Facebook(array(
+      'appId' => Config::FB_APP_ID,
+      'secret' => Config::FB_APP_SECRET,
+    ));
+    if (!$facebook->getUser()) {
+      $this->loggedIn = false;
+      $this->isAdmin = false;
+      return;
+    }
+    $profile = $facebook->api('/me', 'GET');
+
+    $stmt = $this->mysqli->prepare(
+      "SELECT admin FROM brothers WHERE (fbid = ? OR fbid = ?)"
+    );
+    $stmt->bind_param("ss", $profile['id'], $profile['username']);
+    $stmt->execute();
+    $stmt->bind_result($is_admin);
+    $stmt->store_result();
+    $this->loggedIn = $stmt->num_rows > 0;
+
+    $stmt->fetch();
+    $this->isAdmin = (bool)$is_admin;
+    $stmt->close();
   }
 
   protected function isLoggedIn() {
-    return false;
+    return $this->loggedIn;
   }
 
   protected function isAdmin() {
-    return false;
+    return $this->isAdmin;
   }
 
 }

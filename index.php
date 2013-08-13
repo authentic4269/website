@@ -1,9 +1,7 @@
 <?php
 
+require_once('facebook/src/facebook.php');
 require_once('xhp/php-lib/init.php');
-
-//error_log(implode(", ", array_keys($_POST)));
-
 
 function __autoload($class_name) {
   // Autoload the required PHP class.

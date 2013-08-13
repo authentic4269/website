@@ -4,3 +4,6 @@
 [submodule "xhp"]
 	path = xhp
 	url = git://github.com/facebook/xhp
+[submodule "facebook"]
+	path = facebook
+	url = git://github.com/facebook/facebook-php-sdk

@@ -3,7 +3,7 @@
 class UpdateBrotherEndpoint extends AjaxEndpoint {
 
   /**
-   * Validates the form, dispatches the email, and renders the payload.
+   * Updates the given brother profile picture.
    * @return string The inner content markup.
    */
   public function getPayload() {

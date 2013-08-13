@@ -2,8 +2,6 @@
 
 class RequestRouter extends WebObject {
 
-  public function __construct() {} // Do not create a MySQL connection.
-
   private static $routes = array(
     // Main controllers (the second item indicates whether login is required).
     '/'             => array('WebHomepageController',    false),
@@ -18,6 +16,7 @@ class RequestRouter extends WebObject {
     // Endpoints for AJAX requests.
     '/submit_rec'   => array('RecruitmentEndpoint',      false),
     '/update_bro'   => array('UpdateBrotherEndpoint',    true),
+    '/logout'       => array('LogoutEndpoint',           true),
   );
 
   public static function isSecureRoute($route) {
