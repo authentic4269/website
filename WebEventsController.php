@@ -3,11 +3,11 @@
 class WebEventsController extends WebObject {
 
   private static function renderEvents($type, $mysqli) {
-    $rush = $type == "Rush" ? 1 : 0;
     $events = array();
     $result = $mysqli->query(
-      "SELECT title, DATE(time) as date, TIME(time) as time FROM events " .
-      "WHERE rush = " . $rush . " ORDER BY time"
+      "SELECT title, DATE_FORMAT(DATE(time), '%W %M %D') as date, " .
+      "TIME(time) as time FROM events " .
+      "WHERE type = '" . strtolower($type) . "' ORDER BY time"
     );
     // Bucketize the events by date.
     while ($row = $result->fetch_assoc()) {
@@ -22,15 +22,14 @@ class WebEventsController extends WebObject {
     foreach ($events as $day) {
       $day_block = <ul />;
       foreach ($day as $e) {
-        $time = date('h:i:s A', strtotime($e['time']));
+        $time = date('h:i: A', strtotime($e['time']));
         $day_block->appendChild(
           <li>{$time}{': '}{$e['title']}</li>
         );
       }
-      $date = date('l F j', strtotime($day['date']));
       $event_block->appendChild(
         <li>
-          <strong class="gold">{$date}</strong>
+          <strong class="gold">{$day[0]['date']}</strong>
           <br />
           {$day_block}
         </li>
@@ -54,6 +53,10 @@ class WebEventsController extends WebObject {
     }
 
     return self::renderEvents('Rush', $mysqli);
+  }
+
+  public static function renderSocialEvents($mysqli) {
+    return self::renderEvents('Social', $mysqli);
   }
 
   public static function renderRushBlock($mysqli) {

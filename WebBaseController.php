@@ -7,11 +7,11 @@ abstract class WebBaseController extends WebObject {
   private $pages = array(
     '/'            => 'Home',
     '/chapter'     => 'Chapter',
-    '/calendar'    => 'Calendar',
     '/gallery'     => 'Gallery',
     '/brothers'    => 'Brothers',
     '/alumni'      => 'Alumni',
     '/recruitment' => 'Recruitment',
+    '/internal'    => 'Internal',
   );
 
   public function __construct($request) {

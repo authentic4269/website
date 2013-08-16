@@ -11,6 +11,7 @@ class RequestRouter extends WebObject {
     '/chapter'      => array('WebChapterController',     false),
     '/contact'      => array('WebContactController',     false),
     '/gallery'      => array('WebGalleryController',     false),
+    '/internal'     => array('WebInternalController',    true),
     '/recruitment'  => array('WebRecruitmentController', false),
 
     // Endpoints for AJAX requests.
