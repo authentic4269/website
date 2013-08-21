@@ -97,15 +97,15 @@ abstract class WebBaseController extends WebObject {
         delts@cornell.edu</a><br />
         {WebAdController::showAd(1, 'google')}
         &copy; Delta Tau Delta Beta Omicron {date("Y")}<br />
-        Site made by <a href="http://wschurman.com" class="designer">
-        William Schurman</a> and
-        <a href="http://bcuccioli.com" class="designer">Bryan Cuccioli</a>
+        <span class="txt">
+          Site made by
+          <a href="http://wschurman.com" class="designer">
+          William Schurman</a> and
+          <a href="http://bcuccioli.com" class="designer">Bryan Cuccioli</a>
+        </span>
         <br /><br />
         &#x21E1; &#x21E1; &#x21E3; &#x21E3; &#x21E0; &#x21E2; &#x21E0;
         &#x21E2; b a
-        <div id="h8rz" style="display:none;">
-          <div class="imgb"><img id="kitten" alt="meow" /></div>
-        </div>
       </footer>;
   }
  
@@ -118,7 +118,7 @@ abstract class WebBaseController extends WebObject {
     $promo_bar = null;
     if (Config::PROMO_BAR) {
       $promo_bar =
-        <div id="promobar">
+        <div id="promobar" class="txt">
           Check out our new Turntable.fm room
           <a href="http://turntable.fm/deltfm" class="button">Delt.fm</a>
         </div>;
@@ -129,6 +129,9 @@ abstract class WebBaseController extends WebObject {
         <html lang="en">
           {$this->getHtmlHeader()}
           <body>
+            <div id="loading-screen">
+              <h1>Loading...</h1><img src="/img/loading.gif" />
+            </div>
             {$promo_bar}
             <div id="container">
               <div class="header">

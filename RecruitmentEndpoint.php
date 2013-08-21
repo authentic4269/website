@@ -58,12 +58,12 @@ class RecruitmentEndpoint extends AjaxEndpoint {
     }
 
     if (!$this->verifyCaptcha()) {
-      return <h2 class="gold">Incorrect CAPTCHA value entered.</h2>;
+      return <h2 class="gold txt">Incorrect CAPTCHA value entered.</h2>;
     }
 
     $this->sendEmail();
 
-    return <h2 class="gold">Thanks! The form was submitted.</h2>;
+    return <h2 class="gold txt">Thanks! The form was submitted.</h2>;
   }
 
 }

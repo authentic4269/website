@@ -124,16 +124,16 @@ class WebChapterController extends WebBaseController {
         <img id="delt_shelter" src="img/delt.jpeg" width="500px" />
         <h3>Delt Housing Facts</h3>
         <ul id="housing">
-          <li>Home to {$bcount} brothers</li>
-          <li>Every brother has their own bedroom</li>
-          <li>Extra-Large Common Area for all brothers</li>
-          <li>Shared kitchen, dining room, library, and laundry room</li>
-          <li>2 - 50&quot; HD TVs</li>
-          <li>Speaker system that blows clothes off</li>
-          <li>802.11n WPA2 Enterprise Wifi</li>
-          <li>Free parking</li>
-          <li>New furniture, ping pong table, billiards table</li>
-          <li>Completely renovated, state-of-the-art gym</li>
+          <li class="txt">Home to {$bcount} brothers</li>
+          <li class="txt">Every brother has their own bedroom</li>
+          <li class="txt">Extra-Large Common Area for all brothers</li>
+          <li class="txt">Shared kitchen, dining room, library, and laundry room</li>
+          <li class="txt">2 - 50&quot; HD TVs</li>
+          <li class="txt">Speaker system that blows clothes off</li>
+          <li class="txt">802.11n WPA2 Enterprise Wifi</li>
+          <li class="txt">Free parking</li>
+          <li class="txt">New furniture, ping pong table, billiards table</li>
+          <li class="txt">Completely renovated, state-of-the-art gym</li>
         </ul>
       </div>,
 
@@ -204,14 +204,14 @@ class WebChapterController extends WebBaseController {
         </div>
         <div class="content_right pull-right">
           <a href="/recruitment" class="button">
-            <strong>Sign Up Today!</strong><br />
-            <small>Become a man of excellence</small>
+            <strong class="txt">Sign Up Today!</strong><br />
+            <small class="txt">Become a man of excellence</small>
           </a>
           <h2 class="gold">Helpful Links</h2>
           <ul>
-            <li><a href="http://www.delts.org">
+            <li class="txt"><a href="http://www.delts.org">
               delts.org - National Web Site</a></li>
-            <li><a href="http://greeks.cornell.edu">
+            <li class="txt"><a href="http://greeks.cornell.edu">
               greeks.cornell.edu - Cornell OFSA </a></li>
             </ul>
             <br /><br />

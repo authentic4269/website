@@ -19,6 +19,28 @@ $(window).load(function() {
   });
 });
 
+function ghettoize() {
+  $('#loading-screen').css('display', 'block');
+  var elements = $('#main p, #main h1, #main h2, #main h3, .txt');
+
+  var data = {};
+  for (var i = 0; i < elements.length; i++) {
+    data[i] = elements[i].innerHTML;
+  }
+  $.ajax({
+    'method': 'POST',
+    'url': '/ghetto',
+    'data': data,
+    'dataType': 'json',
+    'success': function(reply) {
+      $.each(reply, function(key, val) {
+        elements[key].innerHTML = val;
+      });
+      $('#loading-screen').css('display', 'none');
+    }
+  });
+}
+
 $(document).ready(function(){
   setTimeout('$("#promobar").slideDown(1000,"easeOutBounce")', 2500);
 
@@ -45,13 +67,10 @@ $(document).ready(function(){
     kkeys.push( e.keyCode );
     if ( kkeys.toString().indexOf( konami ) >= 0 && !a ) {
       a = true;
-      var w = Math.floor(Math.random() * 350) + 150;
-      var h = Math.floor(Math.random() * 350) + 150;
-      $("#kitten").attr("src", "http://placekitten.com/"+w+"/"+h);
-      $("#h8rz").fadeIn(200); 
-    } else if (e.keyCode == 27) {
+      ghettoize();
+    }
+    else if (e.keyCode == 27) {
       if (a) {
-        $("#h8rz").fadeOut(200);
         $("#mapbg").fadeOut(200);
         a = false;
         kkeys = [];

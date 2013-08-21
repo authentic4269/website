@@ -112,7 +112,7 @@ class WebBrothersController extends WebBaseController {
             <a href={$link}>{$bro['name']}</a>
           </span>
           <br />
-          <span class="position">{$bro['pos'] . ' ' . $bro['year']}</span>
+          <span class="position txt">{$bro['pos'] . ' ' . $bro['year']}</span>
           <br />
           {$update_link}
         </div>;

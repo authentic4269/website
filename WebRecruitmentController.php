@@ -150,7 +150,7 @@ class WebRecruitmentController extends WebBaseController {
           <h1 class="gold">Recruitment</h1>
           <div class="purple-pull">
             <h2>Why Delt?</h2>
-            <a href="./whydelt_curr.pdf">
+            <a class="txt" href="./whydelt_curr.pdf">
               Click here to learn about the many advantages
               of becoming a Cornell Delt.
             </a>

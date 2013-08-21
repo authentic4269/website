@@ -82,8 +82,8 @@ class WebHomepageController extends WebBaseController {
 
     $signup_button =
       <a href="/recruitment" class="button">
-        <strong>Sign Up Today!</strong><br />
-        <small>Become a man of excellence</small>
+        <strong class="txt">Sign Up Today!</strong><br />
+        <small class="txt">Become a man of excellence</small>
       </a>;
 
     $like_button =

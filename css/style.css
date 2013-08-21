@@ -1458,6 +1458,25 @@ ul li ul li {
   font-size: 1em;
   color: #efefef;
 }
+#loading-screen {
+  background: #000;
+  color: #fff;
+  display: none;
+  left: 0px;
+  min-height: 100%;
+  opacity: 0.85;
+  padding-top: 200px;
+  position: fixed;
+  text-align: center;
+  top: 0px;
+  width: 100%;
+  z-index: 2;
+}
+#loading-screen img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 #promobar {
   display: none; 

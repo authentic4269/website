@@ -24,7 +24,7 @@ class WebEventsController extends WebObject {
       foreach ($day as $e) {
         $time = date('h:i: A', strtotime($e['time']));
         $day_block->appendChild(
-          <li>{$time}{': '}{$e['title']}</li>
+          <li class="txt">{$time}{': '}{$e['title']}</li>
         );
       }
       $event_block->appendChild(

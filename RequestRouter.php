@@ -18,6 +18,7 @@ class RequestRouter extends WebObject {
     '/submit_rec'   => array('RecruitmentEndpoint',      false),
     '/update_bro'   => array('UpdateBrotherEndpoint',    true),
     '/logout'       => array('LogoutEndpoint',           true),
+    '/ghetto'       => array('GhettoEndpoint',           false),
   );
 
   public static function isSecureRoute($route) {
