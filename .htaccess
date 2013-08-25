@@ -89,7 +89,7 @@ ErrorDocument 404 /404
 RedirectMatch 404 /\\.git.*(/|$)
 
 # Redirect everything but static resource requests to index.php.
-RewriteCond %{REQUEST_URI} !(\.css|\.png|\.jpg|\.jpeg|\.gif|\.js|\.pdf)$
+RewriteCond %{REQUEST_URI} !(\.css|\.png|\.jpg|\.jpeg|\.gif|\.js|\.pdf|\.ico)$
 RewriteRule (.*) index.php?req=%{REQUEST_URI} [QSA]
 
 # ----------------------------------------------------------------------

@@ -32,6 +32,7 @@ abstract class WebBaseController extends WebObject {
           Delta Tau Delta | &Delta;&Tau;&Delta; Beta Omicron |
           Cornell University | {$this->getHtmlTitle()}
         </title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <meta
           name="description"
           content="Visit our site to learn more about Cornell Delts" />
