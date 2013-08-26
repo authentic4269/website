@@ -6,6 +6,7 @@ CREATE TABLE `brothers` (
   `fbid` varchar(20) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT 0,
+  `alumni` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 

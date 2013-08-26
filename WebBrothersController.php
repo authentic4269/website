@@ -57,8 +57,8 @@ class WebBrothersController extends WebBaseController {
   private function getBrothers() {
     $result = $this->mysqli->query(
       "SELECT *, (SELECT GROUP_CONCAT(title SEPARATOR ', ') FROM positions p ".
-      "WHERE find_in_set(pid, b.title) > 0) as pos FROM brothers b ".
-      "ORDER BY SUBSTRING_INDEX(title, ',', 1) * 1, year, name"
+      "WHERE find_in_set(pid, b.title) > 0) as pos FROM brothers b " .
+      "WHERE b.alumni=0 ORDER BY SUBSTRING_INDEX(title,',',1)*1, year, name"
     );
     while ($row = $result->fetch_assoc()) {
       if ($this->isAdmin()) {
